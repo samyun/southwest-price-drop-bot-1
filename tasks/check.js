@@ -67,8 +67,8 @@ const COOLDOWN = 1;
             const subject = [
               `✈ Southwest Price Drop Alert: $${alert.price} → $${alert.latestPrice}. `
             ].join('');
-            if (mgEmail.enabled && alert.to_email !== '') { await mgEmail.sendEmail(alert.to_email, subject, message); }
-            if (sms.enabled && alert.phone !== '') { await sms.sendSms(alert.phone, message); }
+            if (mgEmail.enabled && !alert.to_email) { await mgEmail.sendEmail(alert.to_email, subject, message); }
+            if (sms.enabled && !alert.phone) { await sms.sendSms(alert.phone, message); }
 
             await redis.setAsync(cooldownKey, '');
             await redis.expireAsync(cooldownKey, COOLDOWN);
