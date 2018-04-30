@@ -67,6 +67,9 @@ Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to inst
 </kbd>
 
 ## Version history
+### [3.1.1] - 2018-4-29
+  - Fix bug with crash when email or phone number is not set but respective service is enabled
+  - Add semaphore to limit number of pages open at once - hopefully fixing the "Error: Page crashed" error. Limited to 5 pages.
 ### [3.1.0] - 2018-4-29
   - Add checks for invalid error
   - Add notification bars for invalid parameters
