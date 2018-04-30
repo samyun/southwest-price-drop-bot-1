@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+  .mdl-grid
+    .mdl-cell.mdl-cell--12-col
+      .mdl-card.mdl-shadow--2dp
+        .mdl-card__title
+          h2.mdl-card__title-text= "Error!"
+        .mdl-card__actions.mdl-card--border
+        .mdl-card__supporting-text
+          =errorMsg
+
+        .mdl-card__actions.mdl-card--border
+          a.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(href='/')
+            | Homepage

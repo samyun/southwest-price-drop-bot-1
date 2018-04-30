@@ -31,10 +31,14 @@ body {
   z-index: 1;
 }
 
-.wide-card {
+.header-card {
   text-align: center;
   font-size: 1.5em;
   padding: 6px 4px 2px;
+  width: 512px;
+}
+
+.wide-card {
   width: 512px;
 }
 
@@ -58,7 +62,7 @@ body {
   font-family: 'Fjalla One', sans-serif;
 }
 
-.flight-saver {
+.flight-notification {
   background: #e91716;
   color: #ffffff;
 }

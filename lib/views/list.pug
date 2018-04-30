@@ -14,8 +14,11 @@ block content
     each alert in alerts
       .mdl-cell.mdl-cell--12-col
         .mdl-card.mdl-shadow--2dp.flight
+          if alert.everChecked && alert.latestPrice === Infinity
+            a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id + '/edit')
+              | Couldn't fetch price. Double-check inputs!
           if alert.priceHasDropped
-            a.mdl-card__actions.mdl-card--border.flight-saver(href='/' + alert.id)
+            a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id)
               | Price drop alert! Re-book and save $#{alert.price - alert.latestPrice}!
           .mdl-card__supporting-text
             .call-signs
