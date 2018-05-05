@@ -84,7 +84,8 @@ const COOLDOWN = 1;
     await browser.close();
     redis.quit();
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    await browser.close();
     redis.quit();
   }
 })();

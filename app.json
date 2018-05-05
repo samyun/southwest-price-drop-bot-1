@@ -35,6 +35,10 @@
       "description": "Email address to send mail from with Mailgun.  Example: Mailgun Sandbox <postmaster@sandbox0abcdefghijklmnopqrstuvwxyz.mailgun.org>",
       "required": false
     },
+    "MAX_PAGES": {
+      "description": "The maximum number of simultaneous checks. 5 seems to work well on the free Heroku dyno (512MB)",
+      "value": "5"
+    },
     "NODE_MODULES_CACHE": {
       "description": "Leave this set to false.",
       "value": "false"
