@@ -1,112 +1,107 @@
-include mixins/form-css.pug
-
 mixin form(alert)
-  +form-css
-  style.
-    div.form-container {
-      min-height: 420px;
-    }
+  form.mdl-grid(action=(alert ? `/${alert.id}` : '/') method='post')
+    .mdl-cell.mdl-cell--12-col
+      .mdl-card.mdl-shadow--2dp
+        .mdl-card__supporting-text
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#date.mdl-textfield__input(
+              name='date'
+              type='date'
+              readonly=alert
+              required
+              pattern='(([12]\\d{3}[-/.]((0[1-9]|1[0-2])|([1-9]))[-/.]((0[1-9]|[12]\\d|3[01])|([1-9])))|(((0[1-9]|1[0-2])|([1-9]))[-/.]((0[1-9]|[12]\\d|3[01])|([1-9]))[-/.](([12]\\d{3})|(\\d{2}))))'
+              placeholder='YYYY-MM-DD'
+              min=((new Date()).toISOString().substr(0, 10))
+              value=(alert && alert.date.toISOString().substr(0, 10))
+            )
+            label.mdl-textfield__label(for='date') Date
+            span.help Date should be in YYYY-MM-DD or MM/DD/YYYY, example:
+              code.example 2012-12-21
 
-    #from, #to {
-      text-transform: uppercase;
-    }
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#from.mdl-textfield__input(
+              name='from'
+              type='text'
+              readonly=alert
+              required
+              placeholder='DEN'
+              pattern='($^)|([A-Za-z]{3})'
+              maxlength='3'
+              value=(alert && alert.from)
+            )
+            label.mdl-textfield__label(for='from') From
+            span.help The three-letter airport code, example:
+              code.example CLE
 
-    .buttons {
-      margin-bottom: 40px;
-    }
-    .cancel-button {
-      background: #d5152e;
-      color: white;
-      margin-bottom: 20px;
-    }
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#to.mdl-textfield__input(
+              name='to'
+              type='text'
+              readonly=alert
+              required
+              placeholder='SFO'
+              pattern='[A-Za-z]{3}'
+              maxlength='3'
+              value=(alert && alert.to)
+            )
+            label.mdl-textfield__label(for='to') To
+            span.help The three-letter airport code, example:
+              code.example SEA
 
-  form(action=(alert ? `/${alert.id}` : '/') method='post')
-    div.form-container
-      div.field
-        label(for='date') Date
-        input(
-          id='date'
-          name='date'
-          type='date'
-          required
-          placeholder='YYYY-MM-DD'
-          min=((new Date()).toISOString().substr(0, 10))
-          value=(alert && alert.date.toISOString().substr(0, 10))
-        )
+          if (alert && (alert.alertType && alert.alertType == ALERT_TYPES.SINGLE)) || (alertType && alertType == ALERT_TYPES.SINGLE)
+            input(type="hidden" name="alertType" value=ALERT_TYPES.SINGLE)
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#number.mdl-textfield__input(
+                name='number'
+                type='text'
+                readonly=alert
+                required
+                placeholder='123, 456'
+                pattern='[\\d,\\s*]+'
+                value=(alert && alert.number)
+              )
+              label.mdl-textfield__label(for='number') Flight number(s)
+              span.help If the flight has one or more stops, separate flight numbers with a comma, example:
+                code.example 123, 456
+          else
+            input(type="hidden" name="alertType" value=ALERT_TYPES.DAY)
 
-      div.field
-        label(for='from') From
-        input(
-          id='from'
-          name='from'
-          type='text'
-          required
-          placeholder='SFO'
-          pattern='($^)|([A-Za-z]{3})'
-          maxlength='3'
-          value=(alert && alert.from)
-        )
-        span.help The three-letter airport code, example:
-          code.example SFO
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#price.mdl-textfield__input(
+              name='price'
+              type='number'
+              required
+              placeholder='175'
+              value=(alert && alert.price)
+            )
+            label.mdl-textfield__label(for='price') Price threshold
+            span.help We'll text you if the price drops below this threshold, example:
+              code.example 160
 
-      div.field
-        label(for='to') To
-        input(
-          id='to'
-          name='to'
-          type='text'
-          required
-          placeholder='DEN'
-          pattern='[A-Za-z]{3}'
-          maxlength='3'
-          value=(alert && alert.to)
-        )
-        span.help The three-letter airport code, example:
-          code.example DEN
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#phone.mdl-textfield__input(
+              name='phone'
+              type='tel'
+              pattern='1\\d{10}'
+              value=(alert && alert.phone || undefined)
+            )
+            label.mdl-textfield__label(for='phone') Phone number
+            span.help Enter if you want to be texted your price drop
+              br
+              | Include your country code, example:
+              code.example 12223334444
 
-      div.field
-        label(for='number') Flight number(s)
-        input(
-          id='number'
-          name='number'
-          type='text'
-          required
-          placeholder='123, 456'
-          pattern='[\\d,\\s*]+'
-          value=(alert && alert.number)
-        )
-        span.help If nonstop, separate flight numbers with a comma, example:
-          code.example 123, 456
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#to_email.mdl-textfield__input(
+              name='to_email'
+              type='email'
+              value=(alert && alert.to_email || undefined)
+            )
+            label.mdl-textfield__label(for='to_email') Email
+            span.help Enter if you want to be emailed your price drop, example:
+              code.example name@example.com
 
-      div.field
-        label(for='price') Price threshold
-        input(
-          id='price'
-          name='price'
-          type='number'
-          required
-          placeholder='175'
-          value=(alert && alert.price)
-        )
-        span.help We'll text you if the price drops below this threshold, example:
-          code.example 160
-
-      div.field
-        label(for='phone') Phone number
-        input(
-          id='phone'
-          name='phone'
-          type='tel'
-          required
-          placeholder='12223334444'
-          pattern='1\\d{10}'
-          value=(alert && alert.phone || !auth.isAdmin && auth.user || undefined)
-        )
-        span.help Include your country code, example:
-          code.example 12223334444
-
-    div.field
-      div.buttons
-        button.button(type='submit')= alert ? 'Save changes' : 'Create alert'
-        div.button-spacer
-        a.button.cancel-button(href='/') Cancel
+        .mdl-cell.mdl-cell--12-col
+          .mdl-card__actions.mdl-card--border
+            button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(type='submit')= alert ? 'Save changes' : 'Create alert'
+            a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(href='/') Cancel

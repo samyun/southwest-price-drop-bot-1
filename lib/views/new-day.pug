@@ -1,0 +1,11 @@
+extends layout.pug
+
+include form.pug
+include header.pug
+
+block content
+  +header("New Alert for a Specific Day")
+    p Enter your flight details. Date, FROM airport, TO airport, and price threshold is required.
+    p Enter your phone number to be texted if the price drops or your email to be emailed if the price drops.
+    p If neither your phone number or email is entered, you must return to this site to check if your flight's price dropped.
+  +form()

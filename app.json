@@ -1,7 +1,7 @@
 {
   "name": "Southwest Price Drop Bot",
   "description": "Bot that watches Southwest flights for price drops.",
-  "repository": "https://github.com/scott113341/southwest-price-drop-bot",
+  "repository": "https://github.com/samyun/southwest-price-drop-bot",
   "success_url": "/",
   "env": {
     "ADMIN_NAME": {
@@ -12,13 +12,32 @@
       "description": "Login password, used for all accounts."
     },
     "PLIVO_ID": {
-      "description": "Your Plivo Auth ID."
+      "description": "If you would like to use sms text messages, enter your Plivo Auth ID.",
+      "required": false
     },
     "PLIVO_TOKEN": {
-      "description": "Your Plivo Auth token."
+      "description": "Your Plivo Auth token.",
+      "required": false
     },
     "PLIVO_NUMBER": {
-      "description": "Your Plivo phone number. Example: 12223334444"
+      "description": "Your Plivo phone number. Example: 12223334444",
+      "required": false
+    },
+    "MAILGUN_API_KEY": {
+      "description": "If you would like to use email, enter your Mailgun API Key.",
+      "required": false
+    },
+    "MAILGUN_DOMAIN": {
+      "description": "The domain to send emails from, e.g. mg.example.com",
+      "required": false
+     },
+    "MAILGUN_EMAIL": {
+      "description": "Email address to send mail from with Mailgun.  Example: Mailgun Sandbox <postmaster@sandbox0abcdefghijklmnopqrstuvwxyz.mailgun.org>",
+      "required": false
+    },
+    "MAX_PAGES": {
+      "description": "The maximum number of simultaneous checks. 5 seems to work well on the free Heroku dyno (512MB)",
+      "value": "5"
     },
     "NODE_MODULES_CACHE": {
       "description": "Leave this set to false.",
@@ -35,5 +54,13 @@
     "heroku-redis:hobby-dev",
     "papertrail:choklad",
     "scheduler:standard"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/jontewks/puppeteer-heroku-buildpack"
+    }
   ]
 }

@@ -1,46 +1,37 @@
 extends layout.pug
 
-include mixins/form-css.pug
-
 block content
-  +form-css
-  style.
-    p.error {
-      color: #d5152e;
-    }
-    .buttons {
-      margin-bottom: 40px;
-    }
+  form.mdl-grid(method='post')
+    .mdl-cell.mdl-cell--12-col
+      .mdl-card.mdl-shadow--2dp
+        .mdl-card__supporting-text
+          if error
+            p.error Oops, wrong password!
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#user.mdl-textfield__input(
+              type='text'
+              name='user'
+              autocomplete="new-user"
+              autocorrect='off'
+              autocapitalize='off'
+              spellcheck='false'
+              required
+              value=(auth.user || '')
+            )
+            label.mdl-textfield__label(for='user') Username
+            span.help Enter any username to log in. Note that you'll need to remember this username to view your alerts.
 
 
-  h3 Sign in
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#password.mdl-textfield__input(
+              name='password'
+              type='password'
+              autocomplete="new-password"
+              required
+            )
+            label.mdl-textfield__label(for='password') Password
+            span.help Enter the site password. See website owner if you don't know it.
 
-  if error
-    p.error Oops, wrong password!
-
-  form(method='post')
-    div.field
-      label(for='user') User
-      input(
-        id='user'
-        name='user'
-        autocomplete='off'
-        autocorrect='off'
-        autocapitalize='off'
-        spellcheck='false'
-        required
-        value=(auth.user || '')
-      )
-
-    div.field
-      label(for='password') Password
-      input(
-        id='password'
-        name='password'
-        type='password'
-        required
-      )
-
-    div.field
-      div.buttons
-        button.button(type='submit') Sign in
+        .mdl-card__actions.mdl-card--border
+          button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(type='submit')
+            | Sign in

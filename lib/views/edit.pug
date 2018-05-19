@@ -1,7 +1,17 @@
 extends layout.pug
 
 include form.pug
+include header.pug
 
 block content
-  h3 Edit alert
+  +header("Edit your alert details")
+    case alert.alertType
+      when ALERT_TYPES.SINGLE
+        p Edit the alert price, email, or phone number. To check for the cheapest flight on a specific day, delete this Alert
+          |  and create a new one. Note that this will delete the historical prices for this flight.
+      when ALERT_TYPES.DAY
+        p Edit the alert price, email, or phone number. To check prices for a specific flight, delete this Alert and create
+          |  a new one. Note that this will delete the historical prices for this flight.
+      default
+        p WARNING! This is a bug! This hasn't been implemented yet!
   +form(alert)

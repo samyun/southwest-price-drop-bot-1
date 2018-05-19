@@ -1,138 +1,58 @@
 extends layout.pug
 
-mixin linkCell (alert, value)
-  td
-    a&attributes(attributes)(href='/' + alert.id)= value
+include header.pug
 
 block content
-  style.
-    .spacer {
-      height: 10px;
-    }
-
-    .alerts {
-      align-items: center;
-      flex-direction: column;
-      display: flex;
-    }
-    a.alert-link {
-      color: inherit;
-      text-decoration: none;
-    }
-    .alert {
-      border: 1px solid #979797;
-      box-sizing: border-box;
-      display: flex;
-      height: 90px;
-      max-width: 365px;
-    }
-    .alert:hover {
-      background: #f4f4f4;
-    }
-    .alert.dropped {
-      border-top: none;
-    }
-
-    .dropped-banner {
-      background: #d5152e;
-      color: white;
-      font-size: 14px;
-      padding: 2px 0;
-      text-align: center;
-    }
-
-    .flight-box {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-width: 80px;
-      padding: 5px 5px;
-    }
-    .flight-box .airport {
-      color: #3B61AB;
-      font-family: 'PT Mono', 'monospace';
-      font-size: 24px;
-    }
-    .flight-box .flight {
-      color: #9B9B9B;
-      font-size: 14px;
-    }
-
-    .info-box {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      font-size: 20px;
-      justify-content: center;
-      width: 203px;
-    }
-    .info-box div {
-      line-height: 35px;
-    }
-
-    .price-box {
-      align-items: center;
-      background: #ffca4f;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 70px;
-    }
-    .price-box .price-group {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 40px;
-    }
-    .price-box .price-group .price {
-      color: #3b61ab;
-      font-size: 20px;
-    }
-    .price-box .price-group .description {
-      font-size: 14px;
-      line-height: 7px;
-    }
-
-    .new-button {
-      background: #008522;
-      color: white;
-    }
-    .sign-out-button {
-      background: #FFCA4F;
-      color: black;
-    }
-
-
-  h3 Alerts
-
-  div.buttons
-    a.button.new-button(href='/new') New alert
-    div.button-spacer
-    a.button.sign-out-button(href='/sign-out') Sign out
-
-  div.spacer
-
   if alerts.length
-    div.alerts
-      each alert in alerts
-        a.alert-link(href='/' + alert.id)
+    +header("Welcome back " + auth.user +"!")
+      if auth.isAdmin
+        p Note that as the administrator, you can see all alerts.
+  else
+    +header("Welcome " + auth.user +"!")
+      p Click on the + icon on the bottom right to create your first alert.
+  if alerts.length
+    each alert in alerts
+      .mdl-cell.mdl-cell--12-col
+        .mdl-card.mdl-shadow--2dp.flight
+          if alert.everChecked && alert.latestPrice === Infinity
+            a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id + '/edit')
+              | Couldn't fetch price. Double-check inputs!
           if alert.priceHasDropped
-            div.dropped-banner Price drop alert! Re-book now and save $#{alert.price - alert.latestPrice}!
-          div.alert(class=(alert.priceHasDropped ? 'dropped' : ''))
-            div.flight-box
-              div.airport= alert.from
-              div.airport= alert.to
-              div.flight= alert.formattedNumber
-            div.info-box
-              div.date= alert.formattedDate
-              div.phone= alert.formattedPhone
-            div.price-box
-              div.price-group
-                span.price= '$' + alert.price
-                span.description you paid
-              if alert.latestPrice < Infinity
-                div.price-group
-                  span.price= '$' + alert.latestPrice
-                  span.description currently
-        div.spacer
+            a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id)
+              | Price drop alert! Re-book and save $#{alert.price - alert.latestPrice}!
+          .mdl-card__supporting-text
+            .call-signs
+              span.ticket= alert.from
+              i.material-icons flight_land
+              span.ticket= alert.to
+            .flight-info
+              if alert.alertType == ALERT_TYPES.SINGLE
+                .info-group
+                  span Flight #
+                  br
+                  span.ticket= alert.formattedNumber
+              .info-group
+                span Date
+                br
+                span.ticket= alert.formattedDate
+
+          a.mdl-card__actions.mdl-card--border.flight-prices(href='/' + alert.id)
+            .info-group
+              span.price= '$' + alert.price
+              br
+              span.description you paid
+            if alert.latestPrice < Infinity
+              .info-group
+                span.price= '$' + alert.latestPrice
+                br
+                span.description currently
+
+  .bottom-right
+    #add-menu.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+      i.material-icons add
+
+    ul.mdl-menu.mdl-menu--top-right.mdl-js-menu.mdl-js-ripple-effect(data-mdl-for='add-menu')
+      li
+        a.mdl-menu__item(href='/new-single') Specific Flight
+      li
+        a.mdl-menu__item(href='/new-day') Specific Day

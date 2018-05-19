@@ -1,57 +1,27 @@
 doctype html
 html
   head
-    title Southwest Price Drop Bot
+    title SWA Price Drop Bot
     meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
-    link(href="https://fonts.googleapis.com/css?family=PT+Mono|PT+Sans" rel="stylesheet")
-    style.
-      html, body {
-        font-family: 'PT Sans', 'sans-serif';
-        margin: 0;
-        padding: 0;
-      }
-      a {
-        color: black;
-      }
+    link(href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,700|Fjalla+One" rel="stylesheet")
+    link(rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css")
+    link(rel="stylesheet" href="/style.css")
+    link(rel='shortcut icon', href='/favicon.ico?ver=2', type='image/x-icon')
+    link(rel='icon', href='/favicon.ico?ver=2', type='image/x-icon')
+    meta(name="theme-color" content="#3f51b5")
 
-      .buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 5px 0;
-      }
-      .buttons .button {
-        flex: 0 1 10000000px;
-        height: 22px;
-        padding: 5px 0;
-        text-align: center;
-        text-decoration: none;
-      }
-      .buttons .button-spacer {
-        flex: 0 0 10px;
-      }
-
-      header {
-        background: #304cb2;
-        padding: 5px 0;
-        text-align: center;
-      }
-      header a {
-        color: white;
-        font-size: 20px;
-        text-decoration: none;
-      }
-
-      main {
-        box-sizing: border-box;
-        padding: 10px 5px 0;
-        margin: 0 auto;
-        max-width: 375px;
-      }
-
+    script(defer='', src='https://code.getmdl.io/1.3.0/material.min.js')
   body
-    header
-      a(href='/') Southwest Price Drop Bot
-
-    main
-      block content
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      header.mdl-layout__header
+        .mdl-layout__header-row
+          a.mdl-layout-title(href="/")
+            img.logo(src="/logo.png" alt="SWABot")
+          .mdl-layout-spacer
+          if auth.user
+            nav.mdl-navigation
+              a.mdl-navigation__link(href='/sign-out' alt="Logout")
+                i.material-icons exit_to_app
+      main.mdl-layout__content
+        .page-content
+          block content

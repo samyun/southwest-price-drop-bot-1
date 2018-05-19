@@ -1,0 +1,9 @@
+mixin header(title)
+  .mdl-grid
+    .mdl-cell.mdl-cell--12-col
+      .mdl-card.header-card.mdl-shadow--2dp
+        .mdl-card__title
+          h2.mdl-card__title-text= title
+        .mdl-card__actions.mdl-card--border
+        .mdl-card__supporting-text
+          block
