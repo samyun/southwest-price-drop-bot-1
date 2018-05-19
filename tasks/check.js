@@ -19,7 +19,7 @@ const COOLDOWN = 1;
     const values = keys.length ? await redis.mgetAsync(keys) : [];
     console.log(`checking ${values.length} flights`);
 
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
     const lock = new Semaphore(MAX_PAGES);
 
     const promises = values
