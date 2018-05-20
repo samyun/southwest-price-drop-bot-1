@@ -1,14 +1,13 @@
-const dateFormat = require('dateformat');
 const test = require('tape');
 
 const { getFlights } = require('../../lib/bot/get-price.js');
 
 test('getFlights domestic', async t => {
-  const nextWeek = (new Date()).setDate((new Date()).getDate() + 1);
+  const tomorrow = (new Date()).setDate((new Date()).getDate() + 1);
   const args = {
-    from: 'DEN',
-    to: 'SFO',
-    departDate: dateFormat(nextWeek, 'mm/dd/yyyy', true)
+    from: 'SEA',
+    to: 'CLE',
+    departDate: tomorrow
   };
   const flights = await getFlights(args);
 
@@ -20,11 +19,11 @@ test('getFlights domestic', async t => {
 });
 
 test('getFlights international', async t => {
-  const nextWeek = (new Date()).setDate((new Date()).getDate() + 1);
+  const tomorrow = (new Date()).setDate((new Date()).getDate() + 1);
   const args = {
     from: 'DEN',
     to: 'MEX',
-    departDate: dateFormat(nextWeek, 'mm/dd/yyyy', true)
+    departDate: tomorrow
   };
   const flights = await getFlights(args);
 

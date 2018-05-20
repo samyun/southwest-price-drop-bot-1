@@ -4,10 +4,10 @@ block content
   .mdl-grid
     .mdl-cell.mdl-cell--12-col
       .mdl-card.wide-card.mdl-shadow--2dp.flight
-        if !alert.everChecked
+        if alert.fetchingPrices
           a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id)
             | Fetching price... Reload the page in a few minutes
-        if alert.everChecked && alert.latestPrice === Infinity
+        if !alert.fetchingPrices && alert.latestPrice === Infinity
           a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id + '/edit')
             | Couldn't fetch price. Double-check inputs!
         .mdl-card__supporting-text
