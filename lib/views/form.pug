@@ -82,14 +82,12 @@ mixin form(alert)
             input#phone.mdl-textfield__input(
               name='phone'
               type='tel'
-              pattern='1\\d{10}'
+              pattern='\\^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$'
               value=(alert && alert.phone || undefined)
             )
             label.mdl-textfield__label(for='phone') Phone number
             span.help Enter if you want to be texted your price drop
-              br
-              | Include your country code, example:
-              code.example 12223334444
+              code.example 2223334444
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#to_email.mdl-textfield__input(
