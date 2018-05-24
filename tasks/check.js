@@ -47,7 +47,6 @@ const COOLDOWN = 1;
         if (less > 0) {
           console.log(`${flight} dropped $${less} to $${alert.latestPrice}${cooldown ? ' (on cooldown)' : ''}`);
           if (!cooldown) {
-            const noProtocolPath = basePath.substr(basePath.indexOf('://') + 3);
             let message;
             if (alert.alertType === ALERT_TYPES.SINGLE) {
               message = [
@@ -55,7 +54,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
                 `was $${alert.price}, is now $${alert.latestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${noProtocolPath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             } else if (alert.alertType === ALERT_TYPES.DAY) {
               message = [
@@ -63,7 +62,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} was found! `,
                 `Was $${alert.price}, is now $${alert.latestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${noProtocolPath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             }
             const subject = [

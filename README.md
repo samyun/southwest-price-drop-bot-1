@@ -67,10 +67,11 @@ Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to inst
 </kbd>
 
 ## Version history
-### [3.1.2] - 2018-5-19
+### [3.1.2] - 2018-5-24
   - Add unit test for Alerts
   - Add additional logging and error handling
   - Attempt to reduce memory usage by manually calling about:blank prior to closing page
+  - Add protocol to email link
 ### [3.1.1] - 2018-5-4
   - Fix bug with crash when email or phone number is not set but respective service is enabled
   - Add semaphore to limit number of pages open at once - hopefully fixing the "Error: Page crashed" error. Limited to 5 pages. Defaults to 5 pages at once - set ENV.MAX_PAGES to change.
