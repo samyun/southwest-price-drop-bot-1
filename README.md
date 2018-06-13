@@ -67,6 +67,11 @@ Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to inst
 </kbd>
 
 ## Version history
+### [3.1.3] - 2018-6-12
+  - Flight data loaded after page is loaded - added wait for .flight-stops selector
+  - Change URL to current format
+  - Fix test to handle case of no prices found
+  - Add tests for expected bad inputs 
 ### [3.1.2] - 2018-5-24
   - Add unit test for Alerts
   - Add additional logging and error handling
