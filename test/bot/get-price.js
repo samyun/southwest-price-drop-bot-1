@@ -51,7 +51,7 @@ test('getFlights fake FROM airport', async t => {
   };
   const flights = await getFlights(args);
 
-  t.true(!Array.isArray(flights.outbound) && !flights.outbound.length, 'flights.outbound');
+  t.true(!Array.isArray(flights.outbound) || !flights.outbound.length, 'flights.outbound');
   t.end();
 });
 
@@ -64,7 +64,7 @@ test('getFlights fake TO airport', async t => {
   };
   const flights = await getFlights(args);
 
-  t.true(!Array.isArray(flights.outbound) && !flights.outbound.length, 'flights.outbound');
+  t.true(!Array.isArray(flights.outbound) || !flights.outbound.length, 'flights.outbound');
   t.end();
 });
 
@@ -77,6 +77,6 @@ test('getFlights previous date', async t => {
   };
   const flights = await getFlights(args);
 
-  t.true(!Array.isArray(flights.outbound) && !flights.outbound.length, 'flights.outbound');
+  t.true(!Array.isArray(flights.outbound) || !flights.outbound.length, 'flights.outbound');
   t.end();
 });
