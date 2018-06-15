@@ -14,7 +14,7 @@ block content
     each alert in alerts
       .mdl-cell.mdl-cell--12-col
         .mdl-card.mdl-shadow--2dp.flight
-          if alert.everChecked && alert.latestPrice === Infinity
+          if !alert.fetchingPrices && alert.latestPrice === Infinity
             a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id + '/edit')
               | Couldn't fetch price. Double-check inputs!
           if alert.priceHasDropped
