@@ -11,6 +11,7 @@ const { ALERT_TYPES, MAX_PAGES } = require('../lib/constants.js');
 const COOLDOWN = 1;
 
 (async () => {
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
   try {
     const basePath = await redis.getAsync('__BASE_PATH');
     if (!basePath) throw Error('__BASE_PATH is not set in redis');
@@ -19,7 +20,6 @@ const COOLDOWN = 1;
     const values = keys.length ? await redis.mgetAsync(keys) : [];
     console.log(`checking ${values.length} flights`);
 
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const lock = new Semaphore(MAX_PAGES);
 
     const promises = values
@@ -47,7 +47,6 @@ const COOLDOWN = 1;
         if (less > 0) {
           console.log(`${flight} dropped $${less} to $${alert.latestPrice}${cooldown ? ' (on cooldown)' : ''}`);
           if (!cooldown) {
-            const noProtocolPath = basePath.substr(basePath.indexOf('://') + 3);
             let message;
             if (alert.alertType === ALERT_TYPES.SINGLE) {
               message = [
@@ -55,7 +54,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
                 `was $${alert.price}, is now $${alert.latestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${noProtocolPath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             } else if (alert.alertType === ALERT_TYPES.DAY) {
               message = [
@@ -63,7 +62,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} was found! `,
                 `Was $${alert.price}, is now $${alert.latestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${noProtocolPath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             }
             const subject = [
