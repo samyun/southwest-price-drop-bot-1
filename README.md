@@ -78,9 +78,11 @@ Instructions on deploying a proxy is outside the scope of this project. However,
   * You could use something like [Squid](http://www.squid-cache.org) and spin in up natively, in a container, or in a VM. Obviously you'll want to do this outside of Heroku
   * If you do use Squid, you'll want to set up port forwarding or running on a high random port, and locking down `squid.conf` with something like this to prevent someone from using your setup as an open proxy:
 
-    `acl swa dstdomain .southwest.com
-    http_access allow swa
-    http_access deny all`
+  ```
+  acl swa dstdomain .southwest.com
+  http_access allow swa
+  http_access deny all
+  ```
 
 
 ## Version history
