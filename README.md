@@ -1,8 +1,9 @@
 # ALERT!
-## It seems SW got smart and is blocking the Heroku IPs from accessing their site. I'm trying to find a workaround, but it's tough. Local deployments should work fine, as should other cloud providers (Azure, AWS, Digital Ocean, etc).
+### It seems SW got smart and is blocking the Heroku IPs from accessing their site. I'm trying to find a workaround, but it's tough. Local deployments should work fine, as should other cloud providers (Azure, AWS, Digital Ocean, etc).
+
+### In the meantime, @GC-Guy added support for a proxy when making the calls to SW's site.
 
 # Southwest Price Drop Bot
-
 
 This tool lets you monitor the price of Southwest flights that you've booked. It will notify you if the price drops below what you originally paid. Then you can [re-book the same flight](http://dealswelike.boardingarea.com/2014/02/28/if-a-southwest-flight-goes-down-in-price/) and get Southwest credit for the price difference. This tool also lets you monitor the price of all Southwest flights on a given day. It will notify you if any flight on that day drops below the previous cheapest flight. 
 
@@ -26,10 +27,11 @@ When creating alerts, note that the email and phone numbers are optional. If tho
 
 When updates become available, you will have to deploy them yourself using the [Heroku CLI](https://devcenter.heroku.com/articles/git).  This app follows [SemVer](http://semver.org/) in its versioning, so make sure to read the release notes when deploying a major version change.
 
-Note: Deployed versions prior to 4/9/2018 using Mailgun will need to verify constants: MAILGUN_DOMAIN and MAILGUN_EMAIL.
+Note: Deployed versions prior to 4/9/2018 using Mailgun will need to verify constants: `MAILGUN_DOMAIN` and `MAILGUN_EMAIL`.
 
 Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to install the buildpack https://github.com/jontewks/puppeteer-heroku-buildpack
 
+Note: Deployed versions prior to 7/21/2018 (< 3.2.0) on Heroku will need to verify the `PROXY` constant if you want to use a proxy to make the calls.
 
 ## Screenshots
 
@@ -69,7 +71,23 @@ Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to inst
   </a>
 </kbd>
 
+## Proxy information
+
+Instructions on deploying a proxy is outside the scope of this project. However, here's some information about proxies that might be useful:
+
+  * You could use something like [Squid](http://www.squid-cache.org) and spin in up natively, in a container, or in a VM. Obviously you'll want to do this outside of Heroku
+  * If you do use Squid, you'll want to set up port forwarding or running on a high random port, and locking down `squid.conf` with something like this to prevent someone from using your setup as an open proxy:
+
+  ```
+  acl swa dstdomain .southwest.com
+  http_access allow swa
+  http_access deny all
+  ```
+
+
 ## Version history
+### [3.2.0] - 2018-7-21
+  - Merge PR from @GC-Guy to add support for a proxy
 ### [3.1.4] - 2018-7-14
   - Update package.json
   - Merge PR from @evliu to target the price list items more dynamically
@@ -111,6 +129,10 @@ This is a fork of [minamhere's fork](https://github.com/minamhere/southwest-pric
 Downstream changes were integrated from:
   * [PetroccoCo](https://github.com/PetroccoCo/southwest-price-drop-bot) - Email Handling
   * [pmschartz](https://github.com/pmschartz/southwest-price-drop-bot) - Redesign
+
+Thanks to the following for their contributions:
+  * @evliu - target the price list items more dynamically
+  * @GC-Guy - proxy support
 
 
 [deploy-image]: https://www.herokucdn.com/deploy/button.svg
