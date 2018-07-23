@@ -86,6 +86,8 @@ Instructions on deploying a proxy is outside the scope of this project. However,
 
 
 ## Version history
+### [3.2.1] - 2018-7-23
+  - Merge PR from @GC-Guy to fix proxy support in checks
 ### [3.2.0] - 2018-7-21
   - Merge PR from @GC-Guy to add support for a proxy
 ### [3.1.4] - 2018-7-14
