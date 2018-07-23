@@ -11,10 +11,11 @@ const { PROXY, ALERT_TYPES, MAX_PAGES } = require('../lib/constants.js');
 const COOLDOWN = 1;
 
 (async () => {
+  let browser;
   if (PROXY === undefined) {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
+    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
   } else {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server='+PROXY]});
+    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server='+PROXY]});
   }
   try {
     const basePath = await redis.getAsync('__BASE_PATH');
