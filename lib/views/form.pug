@@ -105,6 +105,7 @@ mixin form(alert)
             input#phone.mdl-textfield__input(
               name='phone'
               type='tel'
+              disabled=!smsIsEnabled
               pattern='\\^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$'
               value=(alert && alert.phone || undefined)
             )
@@ -116,6 +117,7 @@ mixin form(alert)
             input#toEmail.mdl-textfield__input(
               name='toEmail'
               type='email'
+              disabled=!mgIsEnabled
               value=(alert && alert.toEmail || undefined)
             )
             label.mdl-textfield__label(for='toEmail') Email
