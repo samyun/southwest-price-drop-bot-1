@@ -29,12 +29,12 @@ block content
           .graph!= graph
         .mdl-card__actions.mdl-card--border.flight-prices
           .info-group
-            span.price= '$' + alert.price
+            span.price= alert.formattedPrice
             br
             span.description you paid
           if alert.latestPrice < Infinity
             .info-group
-              span.price= `$${alert.latestPrice}`
+              span.price= alert.formattedLatestPrice
               br
               span.description currently
         .mdl-card__actions.mdl-card--border

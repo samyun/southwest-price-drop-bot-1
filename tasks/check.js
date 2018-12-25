@@ -13,9 +13,9 @@ const COOLDOWN = 1;
 (async () => {
   let browser;
   if (PROXY === undefined) {
-    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] });
   } else {
-    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server='+PROXY]});
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server=' + PROXY] });
   }
   try {
     const basePath = await redis.getAsync('__BASE_PATH');
@@ -50,14 +50,14 @@ const COOLDOWN = 1;
         // send message if cheaper
         const less = alert.price - alert.latestPrice;
         if (less > 0) {
-          console.log(`${flight} dropped $${less} to $${alert.latestPrice}${cooldown ? ' (on cooldown)' : ''}`);
+          console.log(`${flight} dropped ${alert.formattedPriceDifference} to ${alert.formattedLatestPrice}${cooldown ? ' (on cooldown)' : ''}`);
           if (!cooldown) {
             let message;
             if (alert.alertType === ALERT_TYPES.SINGLE) {
               message = [
                 `WN flight #${alert.number} `,
                 `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
-                `was $${alert.price}, is now $${alert.latestPrice}. `,
+                `was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
                 `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
@@ -65,15 +65,15 @@ const COOLDOWN = 1;
               message = [
                 `A cheaper Southwest flight on ${alert.formattedDate} `,
                 `${alert.from} to ${alert.to} was found! `,
-                `Was $${alert.price}, is now $${alert.latestPrice}. `,
+                `Was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
                 `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             }
             const subject = [
-              `✈ Southwest Price Drop Alert: $${alert.price} → $${alert.latestPrice}. `
+              `✈ Southwest Price Drop Alert: ${alert.formattedPrice} → ${alert.formattedLatestPrice}. `
             ].join('');
-            if (mgEmail.enabled && alert.to_email) { await mgEmail.sendEmail(alert.to_email, subject, message); }
+            if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
             if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
 
             await redis.setAsync(cooldownKey, '');

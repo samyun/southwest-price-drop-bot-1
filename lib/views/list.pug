@@ -19,7 +19,7 @@ block content
               | Couldn't fetch price. Double-check inputs!
           if alert.priceHasDropped
             a.mdl-card__actions.mdl-card--border.flight-notification(href='/' + alert.id)
-              | Price drop alert! Re-book and save $#{alert.price - alert.latestPrice}!
+              | Price drop alert! Re-book and save #{alert.formattedPriceDifference}!
           .mdl-card__supporting-text
             .call-signs
               span.ticket= alert.from
@@ -38,12 +38,12 @@ block content
 
           a.mdl-card__actions.mdl-card--border.flight-prices(href='/' + alert.id)
             .info-group
-              span.price= '$' + alert.price
+              span.price= alert.formattedPrice
               br
               span.description you paid
             if alert.latestPrice < Infinity
               .info-group
-                span.price= '$' + alert.latestPrice
+                span.price= alert.formattedLatestPrice
                 br
                 span.description currently
 
