@@ -99,8 +99,16 @@ a.flight-prices {
   text-transform: uppercase;
 }
 
-.mdl-textfield {
-  margin-bottom: 20px;
+.bookingType {
+  padding-top: 20px;
+}
+
+.mdl-radio {
+  padding-right: 5px;
+}
+
+.last-field  {
+  padding-bottom: 25px;
 }
 
 .mdl-textfield span.help {

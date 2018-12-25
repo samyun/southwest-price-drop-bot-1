@@ -7,45 +7,42 @@ mixin form(alert)
             input#date.mdl-textfield__input(
               name='date'
               type='date'
-              readonly=alert
+              readonly=(typeof(alert) !== 'undefined')
               required
               pattern='(([12]\\d{3}[-/.]((0[1-9]|1[0-2])|([1-9]))[-/.]((0[1-9]|[12]\\d|3[01])|([1-9])))|(((0[1-9]|1[0-2])|([1-9]))[-/.]((0[1-9]|[12]\\d|3[01])|([1-9]))[-/.](([12]\\d{3})|(\\d{2}))))'
-              placeholder='YYYY-MM-DD'
               min=((new Date()).toISOString().substr(0, 10))
               value=(alert && alert.date.toISOString().substr(0, 10))
             )
             label.mdl-textfield__label(for='date') Date
-            span.help Date should be in YYYY-MM-DD or MM/DD/YYYY, example:
-              code.example 2012-12-21
+            span.help Date should be Y/M/D or M/D/Y, e.g.
+              code.example 2018-12-21
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#from.mdl-textfield__input(
               name='from'
               type='text'
-              readonly=alert
+              readonly=(typeof(alert) !== 'undefined')
               required
-              placeholder='DEN'
               pattern='($^)|([A-Za-z]{3})'
               maxlength='3'
               value=(alert && alert.from)
             )
             label.mdl-textfield__label(for='from') From
-            span.help The three-letter airport code, example:
+            span.help The three-letter airport code, e.g.
               code.example CLE
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#to.mdl-textfield__input(
               name='to'
               type='text'
-              readonly=alert
+              readonly=(typeof(alert) !== 'undefined')
               required
-              placeholder='SFO'
               pattern='[A-Za-z]{3}'
               maxlength='3'
               value=(alert && alert.to)
             )
             label.mdl-textfield__label(for='to') To
-            span.help The three-letter airport code, example:
+            span.help The three-letter airport code, e.g.
               code.example SEA
 
           if (alert && (alert.alertType && alert.alertType == ALERT_TYPES.SINGLE)) || (alertType && alertType == ALERT_TYPES.SINGLE)
@@ -54,29 +51,55 @@ mixin form(alert)
               input#number.mdl-textfield__input(
                 name='number'
                 type='text'
-                readonly=alert
+                readonly=(typeof(alert) !== 'undefined')
                 required
-                placeholder='123, 456'
                 pattern='[\\d,\\s*]+'
                 value=(alert && alert.number)
               )
               label.mdl-textfield__label(for='number') Flight number(s)
-              span.help If the flight has one or more stops, separate flight numbers with a comma, example:
+              span.help If the flight has one or more stops, separate flight numbers with a comma, e.g.
                 code.example 123, 456
           else
             input(type="hidden" name="alertType" value=ALERT_TYPES.DAY)
+
+          .bookingType
+            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='cash')
+              input(
+                type="radio" 
+                id="cash" 
+                class="mdl-radio__button" 
+                name="bookingType" 
+                value="cash"
+                disabled=(typeof(alert) !== 'undefined')
+                checked=(!alert.isPointsBooking)
+              )
+              span.mdl-radio__label Cash
+
+            label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for='points')
+              input(
+                type="radio" 
+                id="points" 
+                class="mdl-radio__button" 
+                value="points"
+                name="bookingType" 
+                disabled=(typeof(alert) !== 'undefined')
+                checked=alert.isPointsBooking
+              )
+              span.mdl-radio__label Points
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#price.mdl-textfield__input(
               name='price'
               type='number'
               required
-              placeholder='175'
               value=(alert && alert.price)
             )
             label.mdl-textfield__label(for='price') Price threshold
-            span.help We'll text you if the price drops below this threshold, example:
-              code.example 160
+            span.help Price to alert if below, e.g.
+              if (!alert.isPointsBooking)
+                code.example 175
+              else
+                code.example 5000
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#phone.mdl-textfield__input(
@@ -86,17 +109,17 @@ mixin form(alert)
               value=(alert && alert.phone || undefined)
             )
             label.mdl-textfield__label(for='phone') Phone number
-            span.help Enter if you want to be texted your price drop
+            span.help Optional, number to text alert, e.g.
               code.example 2223334444
 
-          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
             input#to_email.mdl-textfield__input(
               name='to_email'
               type='email'
               value=(alert && alert.to_email || undefined)
             )
             label.mdl-textfield__label(for='to_email') Email
-            span.help Enter if you want to be emailed your price drop, example:
+            span.help Optional, email address to email alert, e.g.
               code.example name@example.com
 
         .mdl-cell.mdl-cell--12-col

@@ -38,12 +38,18 @@ block content
 
           a.mdl-card__actions.mdl-card--border.flight-prices(href='/' + alert.id)
             .info-group
-              span.price= '$' + alert.price
+              if (alert.isPointsBooking)
+                span.price= alert.price + ' points'
+              else
+                span.price= '$' + alert.price
               br
               span.description you paid
             if alert.latestPrice < Infinity
               .info-group
-                span.price= '$' + alert.latestPrice
+                if (alert.isPointsBooking)
+                  span.price= alert.latestPrice + ' points'
+                else
+                  span.price= '$' + alert.latestPrice
                 br
                 span.description currently
 
