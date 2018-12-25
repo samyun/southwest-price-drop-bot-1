@@ -14,8 +14,7 @@ test('getFlights domestic points', async t => {
 
   t.true(flights.outbound, 'flights.outbound');
   t.true(flights.outbound[0], 'flights.outbound[0]');
-  if (flights.outbound[0])
-  {  
+  if (flights.outbound[0]) {
     t.true(flights.outbound[0].number, 'flights.outbound[0].number');
     t.true(flights.outbound[0].stops, 'flights.outbound[0].stops');
     t.true(flights.outbound[0].price, 'flights.outbound[0].price');
@@ -35,8 +34,7 @@ test('getFlights international points', async t => {
 
   t.true(flights.outbound, 'flights.outbound');
   t.true(flights.outbound[0], 'flights.outbound[0]');
-  if (flights.outbound[0])
-  {  
+  if (flights.outbound[0]) {
     t.true(flights.outbound[0].number, 'flights.outbound[0].number');
     t.true(flights.outbound[0].stops, 'flights.outbound[0].stops');
     t.true(flights.outbound[0].price, 'flights.outbound[0].price');

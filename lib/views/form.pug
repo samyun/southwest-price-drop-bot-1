@@ -113,12 +113,12 @@ mixin form(alert)
               code.example 2223334444
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
-            input#to_email.mdl-textfield__input(
-              name='to_email'
+            input#toEmail.mdl-textfield__input(
+              name='toEmail'
               type='email'
-              value=(alert && alert.to_email || undefined)
+              value=(alert && alert.toEmail || undefined)
             )
-            label.mdl-textfield__label(for='to_email') Email
+            label.mdl-textfield__label(for='toEmail') Email
             span.help Optional, email address to email alert, e.g.
               code.example name@example.com
 

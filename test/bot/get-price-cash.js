@@ -14,8 +14,7 @@ test('getFlights domestic cash', async t => {
 
   t.true(flights.outbound, 'flights.outbound');
   t.true(flights.outbound[0], 'flights.outbound[0]');
-  if (flights.outbound[0])
-  {  
+  if (flights.outbound[0]) {
     t.true(flights.outbound[0].number, 'flights.outbound[0].number');
     t.true(flights.outbound[0].stops, 'flights.outbound[0].stops');
     t.true(flights.outbound[0].price, 'flights.outbound[0].price');
@@ -35,8 +34,7 @@ test('getFlights international cash', async t => {
 
   t.true(flights.outbound, 'flights.outbound');
   t.true(flights.outbound[0], 'flights.outbound[0]');
-  if (flights.outbound[0])
-  {  
+  if (flights.outbound[0]) {
     t.true(flights.outbound[0].number, 'flights.outbound[0].number');
     t.true(flights.outbound[0].stops, 'flights.outbound[0].stops');
     t.true(flights.outbound[0].price, 'flights.outbound[0].price');
@@ -54,7 +52,7 @@ test('getFlights fake FROM airport cash', async t => {
   };
   const flights = await getFlights(args);
 
-  t.true(!Array.isArray(flights.outbound) || !flights.outbound.length, 'flights.outbound');
+  t.true(!Array.isArray(flights.outbound) || !flights.outbound.length, 'flights.outbound'); // check if this should be | or &
   t.end();
 });
 
@@ -77,7 +75,7 @@ test('getFlights previous date cash', async t => {
   const args = {
     from: 'SEA',
     to: 'CLE',
-    departDate: tomorrow,
+    departDate: yesterday,
     isPointsBooking: false
   };
   const flights = await getFlights(args);

@@ -13,9 +13,9 @@ const COOLDOWN = 1;
 (async () => {
   let browser;
   if (PROXY === undefined) {
-    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']});
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] });
   } else {
-    browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server='+PROXY]});
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server=' + PROXY] });
   }
   try {
     const basePath = await redis.getAsync('__BASE_PATH');
@@ -73,7 +73,7 @@ const COOLDOWN = 1;
             const subject = [
               `✈ Southwest Price Drop Alert: $${alert.price} → $${alert.latestPrice}. `
             ].join('');
-            if (mgEmail.enabled && alert.to_email) { await mgEmail.sendEmail(alert.to_email, subject, message); }
+            if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
             if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
 
             await redis.setAsync(cooldownKey, '');
