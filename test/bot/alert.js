@@ -9,7 +9,7 @@ test('Alert new day', async t => {
     to: 'sea',
     date: '2018/5/29',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: 'testing@example.com',
     alertType: ALERT_TYPES.DAY,
     fetchingPrices: true
@@ -31,7 +31,7 @@ test('Alert new day', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === alert.toEmail, 'formattedEmail');
   // t.true(alert.latestPrice === args.priceHistory.length ? (args.priceHistory[args.priceHistory.length - 1]).price : Infinity);
   t.true(alert.latestPrice === Infinity, 'latestPrice');
@@ -48,7 +48,7 @@ test('Alert new single (one flight)', async t => {
     date: '2018/5/29',
     number: '123',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: 'testing@example.com',
     alertType: ALERT_TYPES.SINGLE,
     fetchingPrices: true
@@ -70,7 +70,7 @@ test('Alert new single (one flight)', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === alert.toEmail, 'formattedEmail');
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');
@@ -86,7 +86,7 @@ test('Alert new single (two flights)', async t => {
     date: '2018/5/29',
     number: '123, 456',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: 'testing@example.com',
     alertType: ALERT_TYPES.SINGLE,
     fetchingPrices: true
@@ -107,7 +107,7 @@ test('Alert new single (two flights)', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === alert.toEmail, 'formattedEmail');
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');
@@ -235,7 +235,7 @@ test('Alert new day - no email', async t => {
     to: 'sea',
     date: '2018/5/29',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: '',
     alertType: ALERT_TYPES.DAY,
     fetchingPrices: true
@@ -257,7 +257,7 @@ test('Alert new day - no email', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === null, 'formattedEmail');
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');
@@ -273,7 +273,7 @@ test('Alert new single (one flight) - no email', async t => {
     date: '2018/5/29',
     number: '123',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: '',
     alertType: ALERT_TYPES.SINGLE,
     fetchingPrices: true
@@ -295,7 +295,7 @@ test('Alert new single (one flight) - no email', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === null, 'formattedEmail');
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');
@@ -311,7 +311,7 @@ test('Alert new single (two flights) - no email', async t => {
     date: '2018/5/29',
     number: '123, 456',
     price: '200',
-    phone: '1234567890',
+    phone: '5555555555',
     toEmail: '',
     alertType: ALERT_TYPES.SINGLE,
     fetchingPrices: true
@@ -333,7 +333,7 @@ test('Alert new single (two flights) - no email', async t => {
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
-  t.true(alert.formattedPhone === '+1 123-456-7890', 'formattedPhone');
+  t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === null, 'formattedEmail');
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');

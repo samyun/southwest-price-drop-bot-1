@@ -71,7 +71,7 @@ mixin form(alert)
                 name="bookingType" 
                 value="cash"
                 disabled=(typeof(alert) !== 'undefined')
-                checked=(!alert.isPointsBooking)
+                checked=(!alert || (alert && !alert.isPointsBooking))
               )
               span.mdl-radio__label Cash
 
@@ -83,7 +83,7 @@ mixin form(alert)
                 value="points"
                 name="bookingType" 
                 disabled=(typeof(alert) !== 'undefined')
-                checked=alert.isPointsBooking
+                checked=(alert && alert.isPointsBooking)
               )
               span.mdl-radio__label Points
 
@@ -96,7 +96,7 @@ mixin form(alert)
             )
             label.mdl-textfield__label(for='price') Price threshold
             span.help Price to alert if below, e.g.
-              if (!alert.isPointsBooking)
+              if (!alert || (alert && !alert.isPointsBooking))
                 code.example 175
               else
                 code.example 5000
