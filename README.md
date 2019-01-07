@@ -83,9 +83,14 @@ Instructions on deploying a proxy is outside the scope of this project. However,
   http_access allow swa
   http_access deny all
   ```
-
+To configure the Price Drop Bot to use your proxy, define a new PROXY variable within the Heroku Config. The proxy format should just be IP:port. Example: 123.123.123.123:1234
 
 ## Version history
+### [3.3.0] - 2018-12-25
+  - Add support for award flights (points)
+  - Updated dependencies to latest versions
+### [3.2.1] - 2018-7-23
+  - Merge PR from @GC-Guy to fix proxy support in checks
 ### [3.2.0] - 2018-7-21
   - Merge PR from @GC-Guy to add support for a proxy
 ### [3.1.4] - 2018-7-14
