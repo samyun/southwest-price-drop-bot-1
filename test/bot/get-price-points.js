@@ -26,7 +26,7 @@ test('getFlights international points', async t => {
   const tomorrow = (new Date()).setDate((new Date()).getDate() + 1);
   const args = {
     from: 'DEN',
-    to: 'MEX',
+    to: 'CUN',
     departDate: tomorrow,
     isPointsBooking: true
   };
