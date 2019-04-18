@@ -55,7 +55,7 @@
     }
   },
   "addons": [
-    "heroku-redis:hobby-dev",
+    "mongolab:sandbox",
     "papertrail:choklad",
     "scheduler:standard"
   ],
