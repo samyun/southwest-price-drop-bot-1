@@ -84,11 +84,9 @@ const COOLDOWN = 1;
       });
 
     await Promise.all(promises);
-    await browser.close();
-    redis.quit();
   } catch (e) {
     console.error(e);
-    await browser.close();
-    redis.quit();
+  } finally {
+    process.exit();
   }
 })();
