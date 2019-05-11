@@ -10,12 +10,15 @@ const { PROXY, ALERT_TYPES, MAX_PAGES } = require('../lib/constants.js');
 const COOLDOWN = 1;
 
 (async () => {
-  let browser;
-  if (PROXY === undefined) {
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] });
-  } else {
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--proxy-server=' + PROXY] });
+  let browserOptions = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'];
+
+  if (PROXY !== undefined) {
+    browserOptions.append('--proxy-server=' + PROXY);
   }
+
+  // add `headless: false` for debugging SW changes
+  let = browser = await puppeteer.launch({ args: browserOptions });
+
   try {
     const basePath = await redis.getAsync('__BASE_PATH');
     if (!basePath) throw Error('__BASE_PATH is not set in redis');
