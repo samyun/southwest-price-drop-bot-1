@@ -31,16 +31,13 @@ const COOLDOWN = 1;
       .sort((a, b) => a.date - b.date)
       .map(async alert => {
         const flight = `${alert.formattedDate} #${alert.number} ${alert.from} → ${alert.to}`;
+
         // delete alert if in past
         if (alert.date < Date.now()) {
           console.log(`${flight} expired, deleting`);
           redis.delAsync(alert.key());
           return;
         }
-
-        // skip message if alert is on cooldown
-        const cooldownKey = alert.key('cooldown');
-        const cooldown = await redis.existsAsync(cooldownKey);
 
         // get current price
         await alert.getLatestPrice(browser, lock);
@@ -50,34 +47,30 @@ const COOLDOWN = 1;
         const less = alert.price - alert.latestPrice;
         if (less > 0) {
           console.log(`${flight} dropped ${alert.formattedPriceDifference} to ${alert.formattedLatestPrice}${cooldown ? ' (on cooldown)' : ''}`);
-          if (!cooldown) {
-            let message;
-            if (alert.alertType === ALERT_TYPES.SINGLE) {
-              message = [
-                `WN flight #${alert.number} `,
-                `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
-                `was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
-                `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
-              ].join('');
-            } else if (alert.alertType === ALERT_TYPES.DAY) {
-              message = [
-                `A cheaper Southwest flight on ${alert.formattedDate} `,
-                `${alert.from} to ${alert.to} was found! `,
-                `Was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
-                `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
-              ].join('');
-            }
-            const subject = [
-              `✈ Southwest Price Drop Alert: ${alert.formattedPrice} → ${alert.formattedLatestPrice}. `
-            ].join('');
-            if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
-            if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
 
-            await redis.setAsync(cooldownKey, '');
-            await redis.expireAsync(cooldownKey, COOLDOWN);
+          let message;
+          if (alert.alertType === ALERT_TYPES.SINGLE) {
+            message = [
+              `WN flight #${alert.number} `,
+              `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
+              `was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
+              `\n\nOnce rebooked, tap link to lower alert threshold: `,
+              `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
+            ].join('');
+          } else if (alert.alertType === ALERT_TYPES.DAY) {
+            message = [
+              `A cheaper Southwest flight on ${alert.formattedDate} `,
+              `${alert.from} to ${alert.to} was found! `,
+              `Was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
+              `\n\nOnce rebooked, tap link to lower alert threshold: `,
+              `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
+            ].join('');
           }
+
+          const subject = `✈ Southwest Price Drop Alert: ${alert.formattedPrice} → ${alert.formattedLatestPrice}`;
+
+          if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
+          if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
         } else {
           console.log(`${flight} not cheaper`);
         }
