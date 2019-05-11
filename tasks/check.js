@@ -5,7 +5,7 @@ const mgEmail = require('../lib/bot/send-email.js');
 const sms = require('../lib/bot/send-sms.js');
 const puppeteer = require('puppeteer');
 const Semaphore = require('semaphore-async-await').default;
-const { PROXY, ALERT_TYPES, MAX_PAGES } = require('../lib/constants.js');
+const { PROXY, ALERT_TYPES, MAX_PAGES, BASE_URL } = require('../lib/constants.js');
 
 const COOLDOWN = 1;
 
@@ -20,9 +20,6 @@ const COOLDOWN = 1;
   let = browser = await puppeteer.launch({ args: browserOptions });
 
   try {
-    const basePath = await redis.getAsync('__BASE_PATH');
-    if (!basePath) throw Error('__BASE_PATH is not set in redis');
-
     const keys = await redis.keysAsync('alert.*');
     const values = keys.length ? await redis.mgetAsync(keys) : [];
     console.log(`checking ${values.length} flights`);
@@ -61,7 +58,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} on ${alert.formattedDate} `,
                 `was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             } else if (alert.alertType === ALERT_TYPES.DAY) {
               message = [
@@ -69,7 +66,7 @@ const COOLDOWN = 1;
                 `${alert.from} to ${alert.to} was found! `,
                 `Was ${alert.formattedPrice}, is now ${alert.formattedLatestPrice}. `,
                 `\n\nOnce rebooked, tap link to lower alert threshold: `,
-                `${basePath}/${alert.id}/change-price?price=${alert.latestPrice}`
+                `${BASE_URL}/${alert.id}/change-price?price=${alert.latestPrice}`
               ].join('');
             }
             const subject = [
