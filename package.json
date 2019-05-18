@@ -19,6 +19,7 @@
     "lint": "semistandard --fix",
     "start": "node --trace-warnings index.js",
     "debug": "node --inspect index.js",
+    "console": "node --experimental-repl-await ./console.js",
     "task:check": "node --trace-warnings tasks/check.js",
     "test": "tape test/**/*.js"
   },
@@ -36,6 +37,7 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.1",
     "mailgun-js": "^0.22.0",
+    "mongoose": "^5.5.7",
     "npm": "^6.5.0",
     "package.json": "^2.0.1",
     "plivo": "^4.0.5",
@@ -44,7 +46,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "semaphore-async-await": "^1.5.1",
-    "tape": "^4.9.1",
+    "tape": "^4.10.1",
     "victory": "^31.0.2",
     "yarn": "^1.12.3"
   },
