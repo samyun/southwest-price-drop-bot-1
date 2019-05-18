@@ -28,7 +28,7 @@
       "required": false
     },
     "MAILGUN_API_KEY": {
-      "description": "If you would like to use email, enter your Mailgun API Key.",
+      "description": "This should be added automatically. If you would like to use email, enter your Mailgun API Key.",
       "required": false
     },
     "MAILGUN_DOMAIN": {
@@ -57,7 +57,8 @@
   "addons": [
     "mongolab:sandbox",
     "papertrail:choklad",
-    "scheduler:standard"
+    "scheduler:standard",
+    "mailgun:starter"
   ],
   "buildpacks": [
     {
