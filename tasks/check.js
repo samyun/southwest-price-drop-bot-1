@@ -13,7 +13,7 @@ const Semaphore = require('semaphore-async-await').default;
   let browserOptions = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'];
 
   if (PROXY !== undefined) {
-    browserOptions.append('--proxy-server=' + PROXY);
+    browserOptions.push('--proxy-server=' + PROXY);
   }
 
   // add `headless: false` for debugging SW changes
@@ -29,11 +29,11 @@ const Semaphore = require('semaphore-async-await').default;
       .sort((a, b) => a.date - b.date)
       .map(async alert => {
         const flight = `${alert.formattedDate} #${alert.number} ${alert.from} → ${alert.to}`;
-        debugger
+
         // delete alert if in past
         if (alert.date < Date.now()) {
           console.log(`${flight} expired, deleting`);
-          flight.delete();
+          alert.delete();
           return;
         }
 
