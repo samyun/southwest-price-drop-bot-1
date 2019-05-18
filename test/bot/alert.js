@@ -16,6 +16,7 @@ test('Alert new day', async t => {
   };
 
   const alert = new Alert(args);
+  await alert.save();
 
   t.true(alert.user === args.user, 'user');
   t.true(typeof (alert.id) === 'string', 'id');
@@ -26,14 +27,14 @@ test('Alert new day', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null, 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
-  t.true(alert.alertType === args.alertType, 'alertType');
+  t.true(typeof alert.priceHistory, 'Array');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
+  t.equal(alert.alertType, args.alertType);
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
   t.true(alert.formattedNumber === 'WN ' + alert.number.split(',').join(', '), 'formattedNumber');
   t.true(alert.formattedPhone === '+1 555-555-5555', 'formattedPhone');
   t.true(alert.formattedEmail === alert.toEmail, 'formattedEmail');
-  // t.true(alert.latestPrice === args.priceHistory.length ? (args.priceHistory[args.priceHistory.length - 1]).price : Infinity);
   t.true(alert.latestPrice === Infinity, 'latestPrice');
   t.true(alert.priceHasDropped === (alert.latestPrice < args.price), 'priceHasDropped');
   t.true(alert.signature === ([ new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), args.from.toLocaleUpperCase(), args.to.toLocaleUpperCase(), args.number === undefined ? 'All' : args.number.split(',').map(n => n.trim()).filter(n => n.length).join(',') ].join('|')), 'signature');
@@ -65,7 +66,7 @@ test('Alert new single (one flight)', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -102,7 +103,7 @@ test('Alert new single (two flights)', async t => {
   t.true(alert.number === args.number.split(',').map(n => n.trim()).filter(n => n.length).join(','), 'number');
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -129,6 +130,7 @@ test('Alert new day - no phone', async t => {
   };
 
   const alert = new Alert(args);
+  await alert.save();
 
   t.true(alert.user === args.user, 'user');
   t.true(typeof (alert.id) === 'string', 'id');
@@ -139,7 +141,7 @@ test('Alert new day - no phone', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -177,7 +179,7 @@ test('Alert new single (one flight) - no phone', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -215,7 +217,7 @@ test('Alert new single (two flights) - no phone', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -252,7 +254,7 @@ test('Alert new day - no email', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -290,7 +292,7 @@ test('Alert new single (one flight) - no email', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -318,6 +320,7 @@ test('Alert new single (two flights) - no email', async t => {
   };
 
   const alert = new Alert(args);
+  await alert.save();
 
   t.true(alert.user === args.user, 'user');
   t.true(typeof (alert.id) === 'string', 'id');
@@ -328,7 +331,7 @@ test('Alert new single (two flights) - no email', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -355,6 +358,7 @@ test('Alert new day - no email or phone', async t => {
   };
 
   const alert = new Alert(args);
+  await alert.save()
 
   t.true(alert.user === args.user, 'user');
   t.true(typeof (alert.id) === 'string', 'id');
@@ -365,7 +369,7 @@ test('Alert new day - no email or phone', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -393,9 +397,10 @@ test('Alert new single (one flight) - no email or phone', async t => {
   };
 
   const alert = new Alert(args);
+  alert.save();
 
   t.true(alert.user === args.user, 'user');
-  t.true(typeof (alert.id) === 'string', 'id');
+  t.equal(typeof(alert.id), 'string');
   t.true(+alert.date === +new Date(args.date), 'date');
   t.true(alert.from === args.from.toLocaleUpperCase(), 'from');
   t.true(alert.to === args.to.toLocaleUpperCase(), 'to');
@@ -403,7 +408,8 @@ test('Alert new single (one flight) - no email or phone', async t => {
   t.true(alert.price === parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory instanceof Array, 'priceHistory');
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -433,15 +439,16 @@ test('Alert new single (two flights) - no email or phone', async t => {
   const alert = new Alert(args);
 
   t.true(alert.user === args.user, 'user');
-  t.true(typeof (alert.id) === 'string', 'id');
+  t.equal(typeof(alert.id), 'string');
   t.true(+alert.date === +new Date(args.date), 'date');
   t.true(alert.from === args.from.toLocaleUpperCase(), 'from');
   t.true(alert.to === args.to.toLocaleUpperCase(), 'to');
   t.true(alert.number === args.number.split(',').map(n => n.trim()).filter(n => n.length).join(','), 'number');
-  t.true(alert.price === parseInt(args.price, 10), 'price');
+  t.equal(alert.price, parseInt(args.price, 10), 'price');
   t.true(alert.phone === (args.phone !== '' ? args.phone.split('').filter(d => /\d/.test(d)).join('') : null), 'phone');
   t.true(alert.toEmail === (args.toEmail !== '' ? args.toEmail.split('').filter(d => /\S/.test(d)).join('') : null), 'toEmail');
-  t.true(Object.keys(alert.priceHistory).length === 0, 'priceHistory');
+  t.true(alert.priceHistory instanceof Array);
+  t.true(alert.priceHistory.length === 0, 'priceHistory');
   t.true(alert.alertType === args.alertType, 'alertType');
   t.true(alert.fetchingPrices === true, 'fetchingPrices');
   t.true(alert.formattedDate === new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), 'formattedDate');
@@ -453,3 +460,5 @@ test('Alert new single (two flights) - no email or phone', async t => {
   t.true(alert.signature === [ new Date(args.date).toLocaleDateString('en-US', { timeZone: 'UTC' }), args.from.toLocaleUpperCase(), args.to.toLocaleUpperCase(), args.number === undefined ? 'All' : args.number.split(',').map(n => n.trim()).filter(n => n.length).join(',') ].join('|'), 'signature');
   t.end();
 });
+
+test.onFinish(() => process.exit(0));
