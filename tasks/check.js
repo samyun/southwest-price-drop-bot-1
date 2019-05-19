@@ -3,21 +3,13 @@ require('dotenv').config({ silent: true });
 const Alert = require('../lib/bot/alert.js');
 const mgEmail = require('../lib/bot/send-email.js');
 const sms = require('../lib/bot/send-sms.js');
-const { PROXY, ALERT_TYPES, MAX_PAGES, BASE_URL } = require('../lib/constants.js');
+const { ALERT_TYPES, MAX_PAGES, BASE_URL } = require('../lib/constants.js');
 const mongoose = require('../lib/mongo.js');
-
-const puppeteer = require('puppeteer');
+const createBrowser = require('../lib/browser.js');
 const Semaphore = require('semaphore-async-await').default;
 
 (async () => {
-  let browserOptions = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'];
-
-  if (PROXY !== undefined) {
-    browserOptions.push('--proxy-server=' + PROXY);
-  }
-
-  // add `headless: false` for debugging SW changes
-  let = browser = await puppeteer.launch({ args: browserOptions });
+  let browser = await createBrowser();
 
   try {
     const alerts = await Alert.allActiveAlerts();
