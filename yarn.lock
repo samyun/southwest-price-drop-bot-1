@@ -328,6 +328,11 @@ bluebird@3.5.1, bluebird@^3.5.0, bluebird@^3.5.1:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
   integrity sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA==
 
+bluebird@^2.9.34:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
+  integrity sha1-U0uQM8AiyVecVro7Plpcqvu2UOE=
+
 bluebird@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
@@ -754,6 +759,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.7.tgz#2d1d24317afb8abe95d6d2c0b07b57813539d828"
   dependencies:
     delayed-stream "~1.0.0"
+
+commander@^2.8.1:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
+  integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
 
 component-emitter@^1.2.1:
   version "1.2.1"
@@ -4049,6 +4059,15 @@ pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
+portastic@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/portastic/-/portastic-1.0.1.tgz#1c9805d43fae8f6a40cf0dbc7794091a2e9d0d2a"
+  integrity sha1-HJgF1D+uj2pAzw28d5QJGi6dDSo=
+  dependencies:
+    bluebird "^2.9.34"
+    commander "^2.8.1"
+    debug "^2.2.0"
+
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -4146,6 +4165,15 @@ proxy-agent@^3.0.3:
     pac-proxy-agent "^3.0.0"
     proxy-from-env "^1.0.0"
     socks-proxy-agent "^4.0.1"
+
+proxy-chain@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/proxy-chain/-/proxy-chain-0.2.7.tgz#3c24d1a487e37838b0c9fe34317c276f3401e0ec"
+  integrity sha512-e0s94WDfooeC3zQkvIJ/Eudiy/AywTQK4K6PMYbZdBE2m/eug54ThgCPdBE4txHvzi0A0gAVbX04Kt4RygTlRQ==
+  dependencies:
+    bluebird "^3.5.1"
+    portastic "^1.0.1"
+    underscore "^1.9.1"
 
 proxy-from-env@^1.0.0:
   version "1.0.0"
@@ -4290,9 +4318,10 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
-puppeteer@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.11.0.tgz#63cdbe12b07275cd6e0b94bce41f3fcb20305770"
+puppeteer@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.16.0.tgz#4b763d9ff4e69a4bb7a031c3393534214d54f27e"
+  integrity sha512-7hcmbUw+6INffSPBdnO8KSjJRg2bLRoI7EeZMf5MHdV5kpyYMeoMR5w8AIiZbKIhYGwrXlbgvO7gFTsXNHShuQ==
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"
@@ -5495,6 +5524,11 @@ undefsafe@^2.0.2:
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-2.0.2.tgz#225f6b9e0337663e0d8e7cfd686fc2836ccace76"
   dependencies:
     debug "^2.2.0"
+
+underscore@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
 
 union-value@^1.0.0:
   version "1.0.0"
