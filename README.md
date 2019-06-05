@@ -5,7 +5,7 @@
 
 # Southwest Price Drop Bot
 
-This tool lets you monitor the price of Southwest flights that you've booked. It will notify you if the price drops below what you originally paid. Then you can [re-book the same flight](http://dealswelike.boardingarea.com/2014/02/28/if-a-southwest-flight-goes-down-in-price/) and get Southwest credit for the price difference. This tool also lets you monitor the price of all Southwest flights on a given day. It will notify you if any flight on that day drops below the previous cheapest flight. 
+This tool lets you monitor the price of Southwest flights that you've booked. It will notify you if the price drops below what you originally paid. Then you can [re-book the same flight](http://dealswelike.boardingarea.com/2014/02/28/if-a-southwest-flight-goes-down-in-price/) and get Southwest credit for the price difference. This tool also lets you monitor the price of all Southwest flights on a given day. It will notify you if any flight on that day drops below the previous cheapest flight.
 
 Note that you need to have a [Plivo](https://www.plivo.com) account to send the text message notifications and a [Mailgun](https://www.mailgun.com) account to send the email notifications. You can run this tool without these accounts, but you won't get the notifications.
 
@@ -75,6 +75,7 @@ Note: Deployed versions prior to 7/21/2018 (< 3.2.0) on Heroku will need to veri
 
 Instructions on deploying a proxy is outside the scope of this project. However, here's some information about proxies that might be useful:
 
+  * A hosted (cheap) proxy that works is https://luminati.io
   * You could use something like [Squid](http://www.squid-cache.org) and spin in up natively, in a container, or in a VM. Obviously you'll want to do this outside of Heroku
   * If you do use Squid, you'll want to set up port forwarding or running on a high random port, and locking down `squid.conf` with something like this to prevent someone from using your setup as an open proxy:
 
@@ -83,7 +84,21 @@ Instructions on deploying a proxy is outside the scope of this project. However,
   http_access allow swa
   http_access deny all
   ```
-To configure the Price Drop Bot to use your proxy, define a new PROXY variable within the Heroku Config. The proxy format should just be IP:port. Example: 123.123.123.123:1234
+To configure the Price Drop Bot to use your proxy, define a new `PROXY` variable within the Heroku Config. The proxy format should just be IP:port. Example: `heroku config:set PROXY='123.123.123.123:1234'`
+
+## Development
+
+To run the test suite:
+
+```
+yarn test
+```
+
+To run a console loaded up with `Alert` and `Flight` objects:
+
+```
+yarn console
+```
 
 ## Version history
 ### [3.3.0] - 2018-12-25
@@ -100,7 +115,7 @@ To configure the Price Drop Bot to use your proxy, define a new PROXY variable w
   - Flight data loaded after page is loaded - added wait for .flight-stops selector
   - Change URL to current format
   - Fix test to handle case of no prices found
-  - Add tests for expected bad inputs 
+  - Add tests for expected bad inputs
 ### [3.1.2] - 2018-5-24
   - Add unit test for Alerts
   - Add additional logging and error handling
@@ -122,15 +137,16 @@ To configure the Price Drop Bot to use your proxy, define a new PROXY variable w
 ### [2.0.1] - 2018-4-9
   - Integrate upstream changes from PetroccoCo (email handling) and pmschartz (redesign)
 ### [2.0.0] - 2017-12-2
-  - Support Mailgun and Plivo (email and sms) 
+  - Support Mailgun and Plivo (email and sms)
 ### [1.9.5] - 2017-11-30
   - Support Mailgun
-### [< 1.9.5] 
+### [< 1.9.5]
   - Prior work
 
 ## Attribution
 
 This is a fork of [minamhere's fork](https://github.com/minamhere/southwest-price-drop-bot) of [maverick915's fork](https://github.com/maverick915/southwest-price-drop-bot) of [scott113341's original project](https://github.com/scott113341/southwest-price-drop-bot).
+
 Downstream changes were integrated from:
   * [PetroccoCo](https://github.com/PetroccoCo/southwest-price-drop-bot) - Email Handling
   * [pmschartz](https://github.com/pmschartz/southwest-price-drop-bot) - Redesign
