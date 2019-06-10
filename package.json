@@ -44,6 +44,8 @@
     "proxy-chain": "^0.2.7",
     "pug": "^2.0.3",
     "puppeteer": "^1.16.0",
+    "puppeteer-extra": "^2.1.3",
+    "puppeteer-extra-plugin-stealth": "^2.2.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "semaphore-async-await": "^1.5.1",
@@ -53,6 +55,7 @@
   },
   "devDependencies": {
     "nodemon": "1.18.9",
-    "semistandard": "13.0.1"
+    "semistandard": "13.0.1",
+    "fsevents": "2.0.7"
   }
 }
