@@ -1,7 +1,4 @@
 # ALERT!
-### It seems SW got smart and is blocking the Heroku IPs from accessing their site. I'm trying to find a workaround, but it's tough. Local deployments should work fine, as should other cloud providers (Azure, AWS, Digital Ocean, etc).
-
-### In the meantime, @GC-Guy added support for a proxy when making the calls to SW's site.
 
 # Southwest Price Drop Bot
 
@@ -71,11 +68,27 @@ Note: Deployed versions prior to 7/21/2018 (< 3.2.0) on Heroku will need to veri
   </a>
 </kbd>
 
+## SouthWest Bot Protection
+
+<span style="color:red">Right now, SouthWest is successfully not blocking requests from this project.</span>
+
+SouthWest has some very fancy bot protection in place.
+
+* Heroku IPs, and other hosting providers, are blocked from accessing their site. Local deployments should work fine, and some other cloud providers may work as well. The most reliable workaround here is using a residential proxy service.
+* There's also smoe tricky, ubfoscated Javascript that detects headless browsers and is updated very frequently. There's a community of folks that implement headless chrome detection evasions, but it's a can n' mouse game.
+  * https://github.com/paulirish/headless-cat-n-mouse/blob/master/apply-evasions.js
+  * https//github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth/
+  * https://github.com/shirshak55/scrapper-tools
+* Use `CHROME_DEBUG=true DEBUG="puppeteer:*"` combined with `node inspect` to debug strange chrome issues.
+   * Request interception will log all URL load attempts and accept all requests.
+   * `slowmo` is enabled and `headless` is disabled
+   * `https://infosimples.github.io/detect-headless` will be opened before a SouthWest URL
+
 ## Proxy information
 
 Instructions on deploying a proxy is outside the scope of this project. However, here's some information about proxies that might be useful:
 
-  * A hosted (cheap) proxy that works is https://luminati.io
+  * A hosted (cheap) proxy that works is https://luminati.io. It's less than $1 each month and seems reliable. Most public proxies don't seem to work, I imagine there is some sort of public proxy block list that is in place.
   * You could use something like [Squid](http://www.squid-cache.org) and spin in up natively, in a container, or in a VM. Obviously you'll want to do this outside of Heroku
   * If you do use Squid, you'll want to set up port forwarding or running on a high random port, and locking down `squid.conf` with something like this to prevent someone from using your setup as an open proxy:
 
@@ -100,7 +113,17 @@ To run a console loaded up with `Alert` and `Flight` objects:
 yarn console
 ```
 
+When debugging chrome/puppeteer issues it's helpful to use the following command:
+
+```
+DEBUG="puppeteer:*" CHROME_DEBUG=true node tasks/check.js
+```
+
+This will send helpful chromium debugging output into your console, and enable some additional
+logging to help debug what might be going wrong.
+
 ## Version history
+
 ### [3.3.0] - 2018-12-25
   - Add support for award flights (points)
   - Updated dependencies to latest versions
