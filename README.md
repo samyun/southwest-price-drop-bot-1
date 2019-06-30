@@ -71,21 +71,22 @@ Note: Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean de
   </a>
 </kbd>
 
-## SouthWest Bot Protection
+## Southwest Bot Protection
 
-<span style="color:red">Right now, SouthWest is successfully not blocking requests from this project.</span>
+<span style="color:red">Right now, Southwest is successfully blocking requests from this project.</span>
 
-SouthWest has some very fancy bot protection in place.
+Southwest has some very fancy bot protections in place.
 
-* Heroku IPs, and other hosting providers, are blocked from accessing their site. Local deployments should work fine, and some other cloud providers may work as well. The most reliable workaround here is using a residential proxy service.
-* There's also smoe tricky, ubfoscated Javascript that detects headless browsers and is updated very frequently. There's a community of folks that implement headless chrome detection evasions, but it's a can n' mouse game.
+* Heroku IPs, and other hosting providers, are blocked from accessing their site. Local deployments should be permitted to access their site, and some other cloud providers may work as well. The most reliable workaround is using a residential proxy service.
+* There's also some tricky and obfuscated Javascript that detects headless browsers and is updated very frequently. There's a community of folks that implement headless chrome detection evasions, but it's a cat and mouse game.
   * https://github.com/paulirish/headless-cat-n-mouse/blob/master/apply-evasions.js
   * https//github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth/
   * https://github.com/shirshak55/scrapper-tools
 * Use `CHROME_DEBUG=true DEBUG="puppeteer:*"` combined with `node inspect` to debug strange chrome issues.
    * Request interception will log all URL load attempts and accept all requests.
    * `slowmo` is enabled and `headless` is disabled
-   * `https://infosimples.github.io/detect-headless` will be opened before a SouthWest URL
+   * `https://infosimples.github.io/detect-headless` will be opened before a Southwest URL
+
 
 ## Proxy information
 
