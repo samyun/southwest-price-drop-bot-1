@@ -1,4 +1,5 @@
 # ALERT!
+Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and I don't think it will migrate cleanly (or at all). 
 
 # Southwest Price Drop Bot
 
@@ -29,6 +30,8 @@ Note: Deployed versions prior to 4/9/2018 using Mailgun will need to verify cons
 Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to install the buildpack https://github.com/jontewks/puppeteer-heroku-buildpack
 
 Note: Deployed versions prior to 7/21/2018 (< 3.2.0) on Heroku will need to verify the `PROXY` constant if you want to use a proxy to make the calls.
+
+Note: Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and I don't think it will migrate cleanly (or at all). 
 
 ## Screenshots
 
@@ -124,6 +127,12 @@ logging to help debug what might be going wrong.
 
 ## Version history
 
+### [3.4.0] - 2019-06-30
+  - Move from Redis to MongoDB
+  - Update scraping logic
+  - Improve proxy support
+  - Add some anti-bot detection measures
+  - Thanks to @iloveitaly for these changes!
 ### [3.3.0] - 2018-12-25
   - Add support for award flights (points)
   - Updated dependencies to latest versions
