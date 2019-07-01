@@ -31,7 +31,7 @@ Note: Deployed versions prior to 4/28/2018 (< 3.0.0) on Heroku will need to inst
 
 Note: Deployed versions prior to 7/21/2018 (< 3.2.0) on Heroku will need to verify the `PROXY` constant if you want to use a proxy to make the calls.
 
-Note: Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and I don't think it will migrate cleanly (or at all). 
+Note: Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and I don't think it will migrate cleanly (or at all). Otherwise, you'll need to add the mLab MongoDB add-on manually.
 
 ## Screenshots
 
@@ -187,6 +187,7 @@ Downstream changes were integrated from:
 Thanks to the following for their contributions:
   * @evliu - target the price list items more dynamically
   * @GC-Guy - proxy support
+  * @iloveitaly - MongoDB, updated scraping/proxy support, anti-bot detection
 
 
 [deploy-image]: https://www.herokucdn.com/deploy/button.svg
