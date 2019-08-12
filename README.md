@@ -128,6 +128,9 @@ logging to help debug what might be going wrong.
 
 ## Version history
 
+### [3.5.0] - 2019-08-11
+  - Update dependencies, including yarn.lock
+  - Update to Node v12
 ### [3.4.0] - 2019-06-30
   - Move from Redis to MongoDB
   - Update scraping logic
@@ -188,6 +191,7 @@ Thanks to the following for their contributions:
   * @evliu - target the price list items more dynamically
   * @GC-Guy - proxy support
   * @iloveitaly - MongoDB, updated scraping/proxy support, anti-bot detection
+  * @ribordy - lodash fix
 
 
 [deploy-image]: https://www.herokucdn.com/deploy/button.svg
