@@ -1,4 +1,4 @@
-var repl = require("repl");
+var repl = require('repl');
 
 const Flight = require('./lib/bot/flight.js');
 const Alert = require('./lib/bot/alert.js');
