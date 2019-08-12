@@ -1,5 +1,5 @@
 # ALERT!
-Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and I don't think it will migrate cleanly (or at all). 
+Deployed versions prior to 6/30/2019 (< 3.4.0) might want to do a clean deployment - we're changing from Redis to MongoDB, and it doesn't translate, cleanly. This is able to run locally during development somewhat consistently.
 
 # Southwest Price Drop Bot
 
