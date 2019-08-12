@@ -358,7 +358,7 @@ test('Alert new day - no email or phone', async t => {
   };
 
   const alert = new Alert(args);
-  await alert.save()
+  await alert.save();
 
   t.true(alert.user === args.user, 'user');
   t.true(typeof (alert.id) === 'string', 'id');
@@ -400,7 +400,7 @@ test('Alert new single (one flight) - no email or phone', async t => {
   alert.save();
 
   t.true(alert.user === args.user, 'user');
-  t.equal(typeof(alert.id), 'string');
+  t.equal(typeof (alert.id), 'string');
   t.true(+alert.date === +new Date(args.date), 'date');
   t.true(alert.from === args.from.toLocaleUpperCase(), 'from');
   t.true(alert.to === args.to.toLocaleUpperCase(), 'to');
@@ -439,7 +439,7 @@ test('Alert new single (two flights) - no email or phone', async t => {
   const alert = new Alert(args);
 
   t.true(alert.user === args.user, 'user');
-  t.equal(typeof(alert.id), 'string');
+  t.equal(typeof (alert.id), 'string');
   t.true(+alert.date === +new Date(args.date), 'date');
   t.true(alert.from === args.from.toLocaleUpperCase(), 'from');
   t.true(alert.to === args.to.toLocaleUpperCase(), 'to');
