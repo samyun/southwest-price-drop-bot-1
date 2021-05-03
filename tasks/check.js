@@ -69,7 +69,9 @@ const Semaphore = require('semaphore-async-await').default;
     await Promise.all(promises);
   } catch (e) {
     console.error(e);
+    await browser.close();
   } finally {
     process.exit();
+    await browser.close();
   }
 })();
