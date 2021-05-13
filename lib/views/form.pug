@@ -45,6 +45,19 @@ mixin form(alert)
             span.help The three-letter airport code, e.g.
               code.example SEA
 
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#passengers.mdl-textfield__input(
+                name='passengers'
+                type='text'
+                readonly=(typeof(alert) !== 'undefined')
+                required
+                pattern='[0-9]'
+                value=(alert && alert.passengers)
+              )
+              label.mdl-textfield__label(for='passengers') Passengers
+              span.help Number of passengers flying, e.g.
+                code.example 2
+
           if (alert && (alert.alertType && alert.alertType == ALERT_TYPES.SINGLE)) || (alertType && alertType == ALERT_TYPES.SINGLE)
             input(type="hidden" name="alertType" value=ALERT_TYPES.SINGLE)
             .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
