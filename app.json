@@ -59,7 +59,6 @@
     }
   },
   "addons": [
-    "mongolab:sandbox",
     "papertrail:choklad",
     "scheduler:standard",
     "mailgun:starter"
