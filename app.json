@@ -46,6 +46,10 @@
     "NODE_MODULES_CACHE": {
       "description": "Leave this set to false.",
       "value": "false"
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB Atlas Connection String",
+      "required": true
     }
   },
   "formation": {
