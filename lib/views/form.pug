@@ -102,6 +102,17 @@ mixin form(alert)
                 code.example 5000
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#price.mdl-textfield__input(
+              name='passengerCount'
+              type='number'
+              required
+              value=(alert && alert.passengerCount || 1)
+            )
+            label.mdl-textfield__label(for='passengerCount') Passenger Count
+            span.help Passenger Count to Check
+              code.example 1
+
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#phone.mdl-textfield__input(
               name='phone'
               type='tel'
@@ -113,16 +124,16 @@ mixin form(alert)
             span.help Optional, number to text alert, e.g.
               code.example 2223334444
 
-          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
-            input#toEmail.mdl-textfield__input(
-              name='toEmail'
-              type='email'
-              disabled=!mgIsEnabled
-              value=(alert && alert.toEmail || undefined)
-            )
-            label.mdl-textfield__label(for='toEmail') Email
-            span.help Optional, email address to email alert, e.g.
-              code.example name@example.com
+          //.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
+          //  input#toEmail.mdl-textfield__input(
+          //    name='toEmail'
+          //    type='email'
+          //    disabled=!mgIsEnabled
+          //    value=(alert && alert.toEmail || undefined)
+          //  )
+          //  label.mdl-textfield__label(for='toEmail') Email
+          //  span.help Optional, email address to email alert, e.g.
+          //    code.example name@example.com
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
             input#toDiscord.mdl-textfield__input(
