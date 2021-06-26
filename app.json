@@ -50,10 +50,6 @@
     "MONGODB_URI": {
       "description": "MongoDB Atlas Connection String",
       "required": true
-    },
-    "DISCORD_WEBHOOK": {
-      "description": "Webhook for Discord notifications to be sent to",
-      "required": false
     }
   },
   "formation": {
