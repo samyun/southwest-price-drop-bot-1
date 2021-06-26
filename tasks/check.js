@@ -63,7 +63,7 @@ const Semaphore = require('semaphore-async-await').default;
 
           if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
           if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
-          if (discordWh.enabled && alert.toDiscord) { await discordWh.sendDiscordWebhoook(message); }
+          if (discordWh.enabled && alert.toDiscord) { await discordWh.sendDiscordWebhoook(alert.toDiscord,message); }
         } else {
           console.log(`${flight} not cheaper`);
         }
