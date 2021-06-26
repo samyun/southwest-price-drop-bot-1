@@ -60,7 +60,8 @@
   },
   "addons": [
     "papertrail:choklad",
-    "scheduler:standard"
+    "scheduler:standard",
+    "mailgun:starter"
   ],
   "buildpacks": [
     {
