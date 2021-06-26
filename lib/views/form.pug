@@ -124,6 +124,17 @@ mixin form(alert)
             span.help Optional, email address to email alert, e.g.
               code.example name@example.com
 
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
+            input#toDiscord.mdl-textfield__input(
+              name='toDiscord'
+              type='url'
+              disabled=!discordIsEnabled
+              value=(alert && alert.toDiscord || undefined)
+            )
+            label.mdl-textfield__label(for='toDiscord') Webhook
+            span.help Optional, Discord webhook to send alert, e.g.
+              code.example https://discord.com/api/webhooks/111111111111111111/ghsiufghnsjuidfhnsfnsofisfos-fshnduyifsfsfsnfos
+
         .mdl-cell.mdl-cell--12-col
           .mdl-card__actions.mdl-card--border
             button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(type='submit')= alert ? 'Save changes' : 'Create alert'

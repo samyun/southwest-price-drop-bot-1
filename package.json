@@ -39,6 +39,7 @@
     "lodash.merge": "^4.6.2",
     "mailgun-js": "^0.22.0",
     "mongoose": "^5.6.9",
+    "node-fetch": "^2.6.1",
     "npm": "^6.10.3",
     "package.json": "^2.0.1",
     "plivo": "^4.1.3",
