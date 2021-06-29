@@ -87,6 +87,17 @@ mixin form(alert)
               )
               span.mdl-radio__label Points
 
+          //label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect
+          //  input(
+          //    type="checkbox"
+          //    id="nonStopOnly"
+          //    value="nonStopOnly"
+          //    class="mdl-radio__button"
+          //    name="nonStopOnly"
+          //    checked=(alert && alert.nonStopOnly)
+          //  )
+          //  span.mdl-radio__label Nonstop Only
+
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#price.mdl-textfield__input(
               name='price'
@@ -124,16 +135,16 @@ mixin form(alert)
             span.help Optional, number to text alert, e.g.
               code.example 2223334444
 
-          //.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
-          //  input#toEmail.mdl-textfield__input(
-          //    name='toEmail'
-          //    type='email'
-          //    disabled=!mgIsEnabled
-          //    value=(alert && alert.toEmail || undefined)
-          //  )
-          //  label.mdl-textfield__label(for='toEmail') Email
-          //  span.help Optional, email address to email alert, e.g.
-          //    code.example name@example.com
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
+            input#toEmail.mdl-textfield__input(
+              name='toEmail'
+              type='email'
+              disabled=!mgIsEnabled
+              value=(alert && alert.toEmail || undefined)
+            )
+            label.mdl-textfield__label(for='toEmail') Email
+            span.help Optional, email address to email alert, e.g.
+              code.example name@example.com
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
             input#toDiscord.mdl-textfield__input(
