@@ -3,6 +3,8 @@ require('dotenv').config({ silent: true });
 const Alert = require('../lib/bot/alert.js');
 const mgEmail = require('../lib/bot/send-email.js');
 const sms = require('../lib/bot/send-sms.js');
+const discordWh = require('../lib/bot/send-discord.js');
+
 const { ALERT_TYPES, MAX_PAGES, BASE_URL } = require('../lib/constants.js');
 const mongoose = require('../lib/mongo.js');
 const createBrowser = require('../lib/browser.js');
@@ -61,6 +63,7 @@ const Semaphore = require('semaphore-async-await').default;
 
           if (mgEmail.enabled && alert.toEmail) { await mgEmail.sendEmail(alert.toEmail, subject, message); }
           if (sms.enabled && alert.phone) { await sms.sendSms(alert.phone, message); }
+          if (discordWh.enabled && alert.toDiscord) { await discordWh.sendDiscordWebhoook(alert.toDiscord,message); }
         } else {
           console.log(`${flight} not cheaper`);
         }

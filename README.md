@@ -19,7 +19,8 @@ When creating alerts, note that the email and phone numbers are optional. If tho
 ## Deployment
 
 1. Click this button: [![deploy][deploy-image]][deploy-href]
-1. Fill out the config variables and click `Deploy`
+1. Create a MongoDB Atlas database and note the connection string then add this string as a config variable named MONGODB_URI
+1. Fill out the remaining config variables and click `Deploy`
 1. Open up the `Heroku Scheduler` from your app's dashboard
 1. Add an hourly task that runs `npm run task:check`
 

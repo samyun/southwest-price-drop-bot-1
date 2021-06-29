@@ -87,6 +87,17 @@ mixin form(alert)
               )
               span.mdl-radio__label Points
 
+          //label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect
+          //  input(
+          //    type="checkbox"
+          //    id="nonStopOnly"
+          //    value="nonStopOnly"
+          //    class="mdl-radio__button"
+          //    name="nonStopOnly"
+          //    checked=(alert && alert.nonStopOnly)
+          //  )
+          //  span.mdl-radio__label Nonstop Only
+
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#price.mdl-textfield__input(
               name='price'
@@ -100,6 +111,17 @@ mixin form(alert)
                 code.example 175
               else
                 code.example 5000
+
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+            input#price.mdl-textfield__input(
+              name='passengerCount'
+              type='number'
+              required
+              value=(alert && alert.passengerCount || 1)
+            )
+            label.mdl-textfield__label(for='passengerCount') Passenger Count
+            span.help Passenger Count to Check
+              code.example 1
 
           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
             input#phone.mdl-textfield__input(
@@ -123,6 +145,17 @@ mixin form(alert)
             label.mdl-textfield__label(for='toEmail') Email
             span.help Optional, email address to email alert, e.g.
               code.example name@example.com
+
+          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.last-field
+            input#toDiscord.mdl-textfield__input(
+              name='toDiscord'
+              type='url'
+              disabled=!discordIsEnabled
+              value=(alert && alert.toDiscord || undefined)
+            )
+            label.mdl-textfield__label(for='toDiscord') Webhook
+            span.help Optional, Discord webhook to send alert, e.g.
+              code.example https://discord.com/api/webhooks/111111111111111111/ghsiufghnsjuidfhnsfnsofisfos-fshnduyifsfsfsnfos
 
         .mdl-cell.mdl-cell--12-col
           .mdl-card__actions.mdl-card--border
